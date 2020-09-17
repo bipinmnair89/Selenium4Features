@@ -64,6 +64,31 @@ public class TestClass extends BaseConfiguration {
 
     }
 
+    @Test(priority=4)
+    public void get_ElementPosition() {
+        WebElement pageLogo=driver.findElement(By.xpath("//div[@class='ui navbar fixed main menu']/div[contains(@style,'background-image')]"));
+
+        //Methods in Selenium 3 and 4 to get elements height, width and position
+        System.out.println("Methods in Selenium 3 and 4 to get elements height, width and position");
+        Dimension pageLogoDim=pageLogo.getSize();
+        System.out.println("Element height ="+pageLogoDim.getHeight());
+        System.out.println("Element width ="+pageLogoDim.getWidth());
+
+        Point pageLogoPoint=pageLogo.getLocation();
+        System.out.println("Element xValue ="+pageLogoPoint.getX());
+        System.out.println("Element yValue ="+pageLogoPoint.getY());
+
+        //Methods in Selenium 4 to get elements height, width and position
+        System.out.println("Methods in Selenium 4 to get elements height, width and position");
+        Rectangle pageLogoRect=pageLogo.getRect();
+        System.out.println("Element height ="+pageLogoRect.getHeight());
+        System.out.println("Element width ="+pageLogoRect.getWidth());
+        System.out.println("Element xValue ="+pageLogoRect.getX());
+        System.out.println("Element yValue ="+pageLogoRect.getY());
+        System.out.println("Element pointValue ="+pageLogoRect.getPoint());
+        System.out.println("Element dimension ="+pageLogoRect.getDimension());
+    }
+
     @AfterSuite
     public void tearDown()
     {
