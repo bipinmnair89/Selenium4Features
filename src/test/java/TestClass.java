@@ -4,7 +4,9 @@ import org.testng.annotations.*;
 import javax.management.monitor.CounterMonitor;
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class TestClass extends BaseConfiguration {
 
@@ -88,6 +90,29 @@ public class TestClass extends BaseConfiguration {
         System.out.println("Element pointValue ="+pageLogoRect.getPoint());
         System.out.println("Element dimension ="+pageLogoRect.getDimension());
     }
+
+    @Test(priority=5)
+    public void get_NewTaborWindow() {
+        driver.switchTo().newWindow(WindowType.TAB);  //newWindow method of Selenium4
+        driver.get("https://www.google.com");
+        System.out.println(driver.getTitle());
+        driver.close();
+        Set<String> tabSet=driver.getWindowHandles();
+        Iterator<String> it=tabSet.iterator();
+        String parentTab=it.next();
+        driver.switchTo().window(parentTab);
+        System.out.println(driver.getTitle());
+
+        driver.switchTo().newWindow(WindowType.WINDOW); //newWindow method of Selenium4
+        driver.get("https://www.twitter.com");
+        System.out.println(driver.getTitle());
+        driver.close();
+        Set<String> windowSet=driver.getWindowHandles();
+        Iterator<String> it1=windowSet.iterator();
+        String parentWindow=it1.next();
+        driver.switchTo().window(parentWindow);
+        System.out.println(driver.getTitle());
+ }
 
     @AfterSuite
     public void tearDown()
